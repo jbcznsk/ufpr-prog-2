@@ -1,3 +1,16 @@
 Distancia entre palavras
 Parser
 paridade em cds
+
+-------------------------
+
+stdin  (0)
+stdout (1)
+stderr (2)
+
+redirecionar erro , usar 2>
+
+ulimit -a
+sempre fazer o teste de abertura de arquivo
+
+----------------------------------------------
