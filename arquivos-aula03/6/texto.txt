@@ -1,0 +1,5 @@
+Buckypaper é um agregado macroscópico de nanotubos de carbono ou “buckytubos”. 
+A idéia do buckypaper surgiu quando o cientista britânico Harry Kroto e cientistas da Rice University estavam tentando criar as condições encontradas em uma estrela quando ela forma carbono elemental. 
+O material deve seu nome ao buckminsterfulereno, o fulereno com 60 átomos de carbono (uma variação alotrópica do carbono com ligações semelhantes que é algumas vezes referido como “Buckyball” em homenagem a Buckminster Fuller). 
+Richard Smalley, Sir Harold Kroto e Robert Curl dividiram o Prêmio Nobel de Química por seus achados com buckminsterfullerenos. 
+Suas descobertas e subseqüente trabalho com nanotubos de carbono ensejaram uma revolução nos campos da química e ciência dos materiais.
