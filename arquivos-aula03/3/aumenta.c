@@ -12,7 +12,7 @@ int main(){
     
     while(c != EOF){
     
-        if (c != 32)
+        if (c != 32 && c != '\n')
             fputc(c-32, arquivo2);
         else 
             fputc(c, arquivo2);
