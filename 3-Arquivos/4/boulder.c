@@ -5,7 +5,7 @@ int main(){
 
 	char **matriz;
 	int linhas, colunas, contador;
-	char leitura[20], c;
+	char leitura1[20], leitura2[20], c1, c2, c;
 
 	FILE *arquivo;
 	arquivo = fopen("mapa.txt", "r");
@@ -15,21 +15,23 @@ int main(){
 		exit(1);
 	}
 
-	contador = 0;
-	c = fgetc(arquivo);
-	while(c != ' ' && c != '\n'){
-		leitura[contador++] = c;
-		c = fgetc(arquivo);
-	}
-	linhas = atoi(leitura);
+	//contador = 0;
+	//c = fgetc(arquivo);
+	//while(c != ' ' && c != '\n'){
+	//	leitura[contador++] = c;
+	//	c = fgetc(arquivo);
+	//}
+	//linhas = atoi(leitura);
 
-	contador = 0;
-	c = fgetc(arquivo);
-	while(c != ' ' && c != '\n'){
-		leitura[contador++] = c;
-		c = fgetc(arquivo);
-	}
-	colunas = atoi(leitura);
+	//contador = 0;
+	//c = fgetc(arquivo);
+	//while(c != ' ' && c != '\n'){
+	//	leitura[contador++] = c;
+	//	c = fgetc(arquivo);
+	//}
+	//colunas = atoi(leitura);
+
+	fscanf(arquivo, "%d %d\n", &linhas, &colunas);
 
 	printf("linhas : %d, colunas = %d\n", linhas, colunas);
 
