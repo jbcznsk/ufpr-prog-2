@@ -1,46 +1,26 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-#define MAX_PALAVRAS 10000
+#include "dicionario.h"
 
-typedef char *String;
+#define TAM_PALAVRA 50
 
-String *carregaDicionario(FILE *dic, unsigned long int *contador){
-    
-    String *p;
-    int iteracao = 1;
-
-    *contador = 0;
-
-    p = (String *) malloc (sizeof(String)*MAX_PALAVRAS);
-    if (!p){
-        perror("MALLOC FOI PRAS CUCUIA");
-        exit(1);
-    }
-
-    fscanf(dic, "%ms", &p[(*contador)]);
-    while(p[*contador] != NULL){
-        (*contador)++;
-        if ((*contador) >= iteracao*MAX_PALAVRAS){
-            iteracao++;
-            p = realloc (p, iteracao*MAX_PALAVRAS*sizeof(String));
-        }
-        fscanf(dic, "%ms", &p[(*contador)]);
-    }
-
-    return p;
-}
+int buscaBinaria(String *dic, char *palavra);
 
 int main ()
 {
+
+    setlocale (LC_CTYPE, "pt_BR.ISO-8859-15") ;
+
     String *dicionario;
     FILE *dic;
     unsigned long int tamanho_dicionario;
-  
+    int contador;
+    char *palavra;
+    int c;
+
     dic = fopen("brazilian", "r"); // Abre o dicionario
   
-    if (!dic){ // Teste para verificar se o dicionario foi aberto com sucesso
+    if (!dic) // Teste para verificar se o dicionario foi aberto com sucesso
+    { 
         perror("Dicionario nao aberto");
         exit(1);
     }
@@ -51,18 +31,46 @@ int main ()
     // Procurar as palavras (transformar em minuscula antes)
     // -- Ler letra por letra ou por fscanf??
     
+
+    printf("tamanho : %ld\n", tamanho_dicionario);
+
+    palavra =  malloc (TAM_PALAVRA*sizeof(unsigned char));
+    if (!palavra)
+    {
+        perror("MALLOC FAILED");
+        exit(1);
+    }
+    
+    contador = 0;
+    c = getchar();
+    while(c != EOF){
+        
+        if (!isalpha(c) && c != ' ')
+        {
+            putchar(c);
+        } else {
+            if (!(c = ' '))
+            {
+                palavra[contador++] = c;
+            } else {
+                palavra[contador] = '\0';
+                contador = 0;
+            }
+        }
+        
+        c = getc(stdin);
+    }
+
    // for (unsigned long int i = 0; i < 275502; i++)
    //     printf("%s ", dicionario[i]);
-
-
     
-    printf("tamanho : %ld", tamanho_dicionario);
-
+    // Desaloca todo o espaço usado
     for (int i = 0; i  < tamanho_dicionario; i++)
         free(dicionario[i]);
     free(dicionario);
 
-    fclose (dic);
+    fclose (dic); // Fecha o arquivo
     return (0) ;
 }
+
 
