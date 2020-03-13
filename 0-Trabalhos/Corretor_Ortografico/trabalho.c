@@ -3,22 +3,17 @@
 
 #define TAM_PALAVRA 50
 
-int buscaBinaria(String *dic, char *palavra);
-
 int main ()
 {
-
-    setlocale (LC_CTYPE, "pt_BR.ISO-8859-15") ;
+    setlocale (LC_ALL, "pt_BR.ISO-8859-1") ;
 
     String *dicionario;
     FILE *dic;
     unsigned long int tamanho_dicionario;
-    int contador;
+    int contador, c;
     char *palavra;
-    int c;
 
     dic = fopen("brazilian", "r"); // Abre o dicionario
-  
     if (!dic) // Teste para verificar se o dicionario foi aberto com sucesso
     { 
         perror("Dicionario nao aberto");
@@ -26,13 +21,6 @@ int main ()
     }
 
     dicionario = carregaDicionario(dic, &tamanho_dicionario); // Dicionario carregado em RAM
-
-    // Carregar TEXTO
-    // Procurar as palavras (transformar em minuscula antes)
-    // -- Ler letra por letra ou por fscanf??
-    
-
-    printf("tamanho : %ld\n", tamanho_dicionario);
 
     palavra =  malloc (TAM_PALAVRA*sizeof(unsigned char));
     if (!palavra)
@@ -43,31 +31,28 @@ int main ()
     
     contador = 0;
     c = getchar();
-    while(c != EOF){
-        
-        if (!isalpha(c) && c != ' ')
-        {
-            putchar(c);
+    while(c != EOF){   
+        if (isalpha(c)){
+            palavra[contador++] = c;
         } else {
-            if (!(c = ' '))
-            {
-                palavra[contador++] = c;
+            palavra[contador] = '\0';
+            contador = 0;
+            if (buscaBinaria(dicionario, palavra,0,tamanho_dicionario)){
+                printf("%s", palavra);
             } else {
-                palavra[contador] = '\0';
-                contador = 0;
+                printf("[%s]", palavra);
             }
+            printf("%c", c);
         }
-        
-        c = getc(stdin);
+        c = getchar();
     }
 
-   // for (unsigned long int i = 0; i < 275502; i++)
-   //     printf("%s ", dicionario[i]);
-    
     // Desaloca todo o espaço usado
     for (int i = 0; i  < tamanho_dicionario; i++)
         free(dicionario[i]);
     free(dicionario);
+
+    free(palavra);
 
     fclose (dic); // Fecha o arquivo
     return (0) ;

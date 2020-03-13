@@ -28,3 +28,24 @@ String *carregaDicionario(FILE *dic, unsigned long int *contador){
 
     return p;
 }
+
+int buscaBinaria(String *dic, char *palavra, int inicio, int fim){
+
+    int meio = (inicio + fim) / 2;
+    int i;
+
+    printf("comparando %s com %s \n", dic[meio], palavra);
+
+    if (!strcmp(palavra, dic[meio]))
+        return 1;
+
+    while(dic[meio][i] != '\n' && palavra[i] != '\0'){
+        if (palavra[i] < dic[meio][i]){
+            return buscaBinaria(dic, palavra, inicio, meio);
+        } else if (palavra[i] > dic[meio][i]){
+            return buscaBinaria(dic, palavra, meio+1, fim);
+        }
+        i++;
+    }
+    return 0;
+}
