@@ -29,7 +29,7 @@ int main ()
         exit(1);
     }
     
-    contador = 0;
+   /* contador = 0;
     c = getchar();
     while(c != EOF){   
         if (isalpha(c)){
@@ -46,7 +46,21 @@ int main ()
         }
         c = getchar();
     }
+*/
 
+    contador = 0;
+    c = getchar();
+    while(c != EOF){   
+        if (isalpha(c)){
+            palavra[contador++] = c;
+        } else {
+            palavra[contador] = '\0';
+            contador = 0;
+            printf("[%s]", palavra);
+            //printf("%c", c);
+        }
+        c = getchar();
+    }
     // Desaloca todo o espaço usado
     for (int i = 0; i  < tamanho_dicionario; i++)
         free(dicionario[i]);
