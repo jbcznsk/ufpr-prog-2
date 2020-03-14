@@ -29,23 +29,35 @@ String *carregaDicionario(FILE *dic, unsigned long int *contador){
     return p;
 }
 
+
+
 int buscaBinaria(String *dic, char *palavra, int inicio, int fim){
 
-    int meio = (inicio + fim) / 2;
-    int i;
+    int meio = (inicio + fim) / 2, busca;
+	char *palavra_busca, *palavra_dic;
 
-    printf("comparando %s com %s \n", dic[meio], palavra);
+	palavra_busca = (char*) malloc (sizeof(palavra)   * sizeof(char));
+	//palavra_dic   = (char*) malloc (sizeof(dic[meio]) * sizeof(char));
 
-    if (!strcmp(palavra, dic[meio]))
-        return 1;
+    //printf("comparando %s com %s \nMeio = %d\n", palavra, dic[meio], meio);
+	//getchar();
+	//dic[meio][0] = tolower(dic[meio][0]);
+	for(int i = 0; i < strlen(palavra); i++)
+		palavra_busca[i] = tolower(palavra[i]);
 
-    while(dic[meio][i] != '\n' && palavra[i] != '\0'){
-        if (palavra[i] < dic[meio][i]){
-            return buscaBinaria(dic, palavra, inicio, meio);
-        } else if (palavra[i] > dic[meio][i]){
-            return buscaBinaria(dic, palavra, meio+1, fim);
-        }
-        i++;
-    }
-    return 0;
+    //busca = strcmp(palavra_busca, palavra_dic);
+	busca = strcasecmp(palavra, dic[meio]);
+	
+	free(palavra_busca);
+
+	if ((fim-inicio) <= 0)
+		return 0;
+
+	if (!busca)
+		return 1;
+	else if (busca < 0)
+		return buscaBinaria(dic, palavra,inicio, meio);
+	else 
+		return buscaBinaria(dic, palavra, meio+1, fim);
+	
 }

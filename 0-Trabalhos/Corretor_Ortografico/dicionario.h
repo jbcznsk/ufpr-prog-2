@@ -11,4 +11,6 @@ typedef char *String;
 
 String *carregaDicionario(FILE *dic, unsigned long int *contador);
 
+
+
 int buscaBinaria(String *dic, char *palavra, int inicio, int fim);
