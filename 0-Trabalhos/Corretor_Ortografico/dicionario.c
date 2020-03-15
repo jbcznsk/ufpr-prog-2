@@ -29,30 +29,19 @@ String *carregaDicionario(FILE *dic, unsigned long int *contador){
     return p;
 }
 
-
+int funcaoComparacao(const void *p1,const void *p2) {
+	return strcasecmp(*(char **) p1, *(char **) p2);       
+}
 
 int buscaBinaria(String *dic, char *palavra, int inicio, int fim){
 
     int meio = (inicio + fim) / 2, busca;
-	char *palavra_busca, *palavra_dic;
 
-	palavra_busca = (char*) malloc (sizeof(palavra)   * sizeof(char));
-	//palavra_dic   = (char*) malloc (sizeof(dic[meio]) * sizeof(char));
-
-    //printf("comparando %s com %s \nMeio = %d\n", palavra, dic[meio], meio);
-	//getchar();
-	//dic[meio][0] = tolower(dic[meio][0]);
-	for(int i = 0; i < strlen(palavra); i++)
-		palavra_busca[i] = tolower(palavra[i]);
-
-    //busca = strcmp(palavra_busca, palavra_dic);
-	busca = strcasecmp(palavra, dic[meio]);
-	
-	free(palavra_busca);
-
-	if ((fim-inicio) <= 0)
+	if (fim <= inicio)
 		return 0;
 
+	busca = strcasecmp(palavra, dic[meio]);
+	
 	if (!busca)
 		return 1;
 	else if (busca < 0)
@@ -60,4 +49,40 @@ int buscaBinaria(String *dic, char *palavra, int inicio, int fim){
 	else 
 		return buscaBinaria(dic, palavra, meio+1, fim);
 	
+}
+
+
+void processaTexto(String *dicionario, int tamanho_dicionario){
+    
+    int contador;
+    char *palavra, c;
+
+    palavra = (char*) malloc (TAM_PALAVRA*sizeof(char)); // Aloca a palavra que será usada como comparação
+    if (!palavra) // Verifica se foi alocada corretamente
+    {
+        perror("MALLOC FAILED");
+        exit(1);
+    }
+
+    contador = 0;
+    c = getchar();
+    while(c != EOF){   
+        while(!isalpha(c) && c != EOF){
+            printf("%c", c);
+			c = getchar();
+  		}
+       	while(isalpha(c) && c != EOF){
+			palavra[contador++] = c;
+			c = getchar();
+		}
+        palavra[contador] = '\0';
+		if (strcmp(palavra, "")){
+        	if (buscaBinaria(dicionario, palavra, 0, tamanho_dicionario))
+				printf("%s", palavra);
+			else
+				printf("[%s]", palavra);
+        contador = 0;
+		}
+    }
+    free(palavra);
 }
