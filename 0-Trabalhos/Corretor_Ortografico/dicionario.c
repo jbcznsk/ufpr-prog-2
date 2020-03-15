@@ -1,3 +1,5 @@
+// GRR20190372 Jorge Lucas Vicilli Jabczenski
+
 #include "dicionario.h"
 
 String *carregaDicionario(FILE *dic, unsigned long int *contador){

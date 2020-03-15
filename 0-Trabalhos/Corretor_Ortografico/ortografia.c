@@ -1,5 +1,3 @@
-// GRR20190372 Jorge Lucas Vicilli Jabczenski
-
 #include "dicionario.h"
 
 int main ()
