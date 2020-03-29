@@ -11,8 +11,8 @@ int main ()
     unsigned long int tamanho_dicionario;
 
 /*=====================================================================================*/
-
-    dic = fopen("brazilian", "r"); // Abre o dicionario
+/*                                                                                     */
+    dic = fopen("/usr/share/dict/brazilian", "r"); // Abre o dicionario
     if (!dic) // Teste para verificar se o dicionario foi aberto com sucesso
     { 
         perror("Dicionario nao aberto");
